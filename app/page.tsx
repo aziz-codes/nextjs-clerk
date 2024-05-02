@@ -1,6 +1,6 @@
 "use client";
 import { useAuth, useUser } from "@clerk/nextjs";
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export default function HomePage() {
   const { isLoaded, userId, sessionId } = useAuth();
   const { user } = useUser();
@@ -14,6 +14,10 @@ export default function HomePage() {
       Hello, {userId} your current active session is {sessionId}
       name is {user?.firstName}
       {user?.lastName}
+      <Avatar>
+        <AvatarFallback>{user?.fullName?.slice(0, 3)}</AvatarFallback>
+        <AvatarImage src={user?.imageUrl} />
+      </Avatar>
     </div>
   );
 }
